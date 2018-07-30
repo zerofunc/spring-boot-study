@@ -1,16 +1,21 @@
 package me.hj;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@EnableConfigurationProperties(ManProperties.class)
 public class ManConfiguration {
 
 	@Bean
-	public Man man() {
+	@ConditionalOnMissingBean
+	public Man man(ManProperties properties) {
 		Man man = new Man();
-		man.setAge(22);
-		man.setName("hyeongju");
+		man.setAge(properties.getAge());
+		man.setName(properties.getName());
 		return man;
 	}
 }

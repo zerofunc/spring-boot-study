@@ -13,13 +13,5 @@ public class Application {
 		SpringApplication springApplication = new SpringApplication(Application.class);
 		springApplication.setWebApplicationType(WebApplicationType.NONE);
 		springApplication.run(args);
-		//SpringApplication.run(Application.class,  args);
-	}
-	@Bean
-	public Man man() {
-		Man man = new Man();
-		man.setName("qwe");
-		man.setAge(99);
-		return man;
 	}
 }

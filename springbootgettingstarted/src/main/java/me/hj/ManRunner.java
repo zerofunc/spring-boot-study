@@ -10,6 +10,7 @@ public class ManRunner implements ApplicationRunner {
 
 	@Autowired
 	Man man;
+
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println(man);
