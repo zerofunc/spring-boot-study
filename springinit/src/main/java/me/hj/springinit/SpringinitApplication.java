@@ -9,7 +9,6 @@ public class SpringinitApplication {
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(SpringinitApplication.class);
-        app.addListeners(new SimpleListener());
         app.run(args);
     }
 }
