@@ -9,8 +9,9 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 public class SpringinitApplication {
 
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(SpringinitApplication.class);
-        app.setWebApplicationType(WebApplicationType.SERVLET);
-        app.run(args);
+        new SpringApplicationBuilder()
+                .sources(SpringinitApplication.class)
+                .build()
+                .run(args);
     }
 }
