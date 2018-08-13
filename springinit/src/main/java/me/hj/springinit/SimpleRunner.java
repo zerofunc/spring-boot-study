@@ -10,13 +10,16 @@ import org.springframework.stereotype.Component;
 public class SimpleRunner implements ApplicationRunner {
 
     @Autowired
-    private HJProperties hjProperties;
+    private String hello;
 
+    @Autowired
+    private HJProperties hjProperties;
     @Override
     public void run(ApplicationArguments args)  {
         System.out.println("=======================");
+        System.out.println(hello);
+        System.out.println(hjProperties.getName());
         System.out.println(hjProperties.getFullName());
-        System.out.println(hjProperties.getAge());
         System.out.println("=======================");
     }
 }
