@@ -1,5 +1,7 @@
 package me.hj.springinit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SimpleRunner implements ApplicationRunner {
 
+    private Logger logger = LoggerFactory.getLogger(SimpleRunner.class);
     @Autowired
     private String hello;
 
@@ -16,11 +19,11 @@ public class SimpleRunner implements ApplicationRunner {
     private HJProperties hjProperties;
     @Override
     public void run(ApplicationArguments args)  {
-        System.out.println("=======================");
-        System.out.println(hello);
-        System.out.println(hjProperties.getName());
-        System.out.println(hjProperties.getFullName());
-        System.out.println("=======================");
+        logger.info("-=======================-");
+        logger.info(hello);
+        logger.info(hjProperties.getName());
+        logger.info(hjProperties.getFullName());
+        logger.info("-=======================-");
     }
 }
 
