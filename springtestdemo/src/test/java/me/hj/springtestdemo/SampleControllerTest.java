@@ -3,7 +3,9 @@ package me.hj.springtestdemo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -19,21 +21,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
+@WebMvcTest(SampleController.class)
 public class SampleControllerTest {
-
-    @Autowired
-    WebTestClient webTestClient;
 
     @MockBean
     SampleService mockSampleService;
+
+    @Autowired
+    MockMvc mockMvc;
+
     @Test
     public void hello() throws Exception {
         when(mockSampleService.getName()).thenReturn("holly");
 
-        webTestClient.get().uri("/hello").exchange()
-                .expectStatus().isOk()
-                .expectBody(String.class).isEqualTo("helloholly");
+        mockMvc.perform(get("/hello"))
+                .andExpect(content().string("helloholly"));
     }
 }
