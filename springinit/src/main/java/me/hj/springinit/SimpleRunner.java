@@ -19,11 +19,11 @@ public class SimpleRunner implements ApplicationRunner {
     private HJProperties hjProperties;
     @Override
     public void run(ApplicationArguments args)  {
-        logger.info("-=======================-");
-        logger.info(hello);
-        logger.info(hjProperties.getName());
-        logger.info(hjProperties.getFullName());
-        logger.info("-=======================-");
+        logger.debug("-=======================-");
+        logger.debug(hello);
+        logger.debug(hjProperties.getName());
+        logger.debug(hjProperties.getFullName());
+        logger.debug("-=======================-");
     }
 }
 
