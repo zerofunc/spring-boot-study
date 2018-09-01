@@ -11,10 +11,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.regex.Matcher;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(SampleController.class)
@@ -31,6 +31,8 @@ public class SampleControllerTest {
         mockMvc.perform(get("/hello"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("hello"))
-                .andExpect(model().attribute("name", Matchers.is("hj")));
+                .andDo(print())
+                .andExpect(model().attribute("name", Matchers.is("hj")))
+                .andExpect(content().string(containsString("hj")));
     }
 }
