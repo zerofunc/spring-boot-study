@@ -1,5 +1,8 @@
 package me.hj.springbootthymeleaf;
 
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlHeading1;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +14,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.regex.Matcher;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -20,19 +24,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(SampleController.class)
 public class SampleControllerTest {
     @Autowired
-    MockMvc mockMvc;
+    WebClient webClient;
 
     @Test
     public void hello() throws Exception {
-        // 요청 :"/
-        // dmdekq
-        // 모델 : name : hj
-        // 뷰 이름 : hello
-        mockMvc.perform(get("/hello"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("hello"))
-                .andDo(print())
-                .andExpect(model().attribute("name", Matchers.is("hj")))
-                .andExpect(content().string(containsString("hj")));
+        HtmlPage page = webClient.getPage("/hello");
+        HtmlHeading1 h1 = page.getFirstByXPath("//h1");
+        assertThat(h1.getTextContent()).isEqualToIgnoringCase("hj");
     }
 }
