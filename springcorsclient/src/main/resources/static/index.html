@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<h1>CORS client</h1>
 <script src="/webjars/jquery/3.3.1/dist/jquery.min.js"></script>
+<h1>CORS client</h1>
+
 <script>
     $(function() {
         $.ajax("http://localhost:8080/hello")
+
             .done(function(msg) {
                 alert(msg);
+                console.log("bc");
             })
             .fail(function() {
                 alert("fail");
+                console.log("d");
             });
     })
 </script>
