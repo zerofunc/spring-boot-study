@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @Component
-public class H2Runner implements ApplicationRunner {
+public class MySQLRunner implements ApplicationRunner {
     @Autowired
     DataSource dataSource;
 
